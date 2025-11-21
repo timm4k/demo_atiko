@@ -1,0 +1,212 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="HiddenScrollViewerStyle" TargetType="ScrollViewer">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollViewer">
+                    <Grid>
+                        <ScrollContentPresenter x:Name="ScrollContentPresenter" />
+                        <ScrollBar
+                            x:Name="VerticalScrollBar"
+                            Width="0"
+                            Opacity="0"
+                            Visibility="{TemplateBinding VerticalScrollBarVisibility}" />
+                        <ScrollBar
+                            x:Name="HorizontalScrollBar"
+                            Height="0"
+                            Opacity="0"
+                            Visibility="{TemplateBinding HorizontalScrollBarVisibility}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="MainPage_FiltersPanelTemplate">
+        <Border
+            MinWidth="240"
+            MaxWidth="320"
+            Padding="16,16,16,0"
+            CornerRadius="0"
+            Style="{StaticResource PanelStyle}">
+            <ScrollViewer
+                HorizontalScrollBarVisibility="Disabled"
+                Style="{StaticResource HiddenScrollViewerStyle}"
+                VerticalScrollBarVisibility="Auto">
+                <StackPanel
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Spacing="18">
+                    <TextBlock
+                        x:Name="AtikoTitle"
+                        Margin="6,0,0,6"
+                        HorizontalAlignment="Left"
+                        FontFamily="Segoe Script"
+                        FontSize="36"
+                        FontStyle="Italic"
+                        FontWeight="SemiBold"
+                        Foreground="{StaticResource PrimaryBrush}"
+                        Text="Atiko" />
+
+                    <StackPanel
+                        HorizontalAlignment="Stretch"
+                        Orientation="Horizontal"
+                        Spacing="12">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            Style="{StaticResource Heading2Style}"
+                            Text="Filters" />
+                        <Button
+                            Margin="8,0,0,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            Command="{Binding ResetAllCommand}"
+                            Content="Reset All"
+                            Foreground="{StaticResource PrimaryBrush}"
+                            Style="{StaticResource SmallCategoryButtonStyle}" />
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Stretch">
+                        <TextBlock
+                            Margin="0,0,0,8"
+                            Style="{StaticResource Heading3Style}"
+                            Text="Era" />
+                        <CheckBox Content="Pre-1900s" IsChecked="{Binding EraFilters.Pre1900s, Mode=TwoWay}" Style="{StaticResource BrownCheckBoxStyle}" />
+                        <CheckBox Content="1900s-1950s" IsChecked="{Binding EraFilters.NineteenHundredsToFifties, Mode=TwoWay}" Style="{StaticResource BrownCheckBoxStyle}" />
+                        <CheckBox Content="1950s-1970s" IsChecked="{Binding EraFilters.FiftiesToSeventies, Mode=TwoWay}" Style="{StaticResource BrownCheckBoxStyle}" />
+                        <CheckBox Content="1970s-1990s" IsChecked="{Binding EraFilters.SeventiesToNineties, Mode=TwoWay}" Style="{StaticResource BrownCheckBoxStyle}" />
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Stretch">
+                        <TextBlock
+                            Margin="0,0,0,8"
+                            Style="{StaticResource Heading3Style}"
+                            Text="Condition" />
+                        <CheckBox Content="All" IsChecked="{Binding ConditionFilters.All, Mode=TwoWay}" Style="{StaticResource BrownCheckBoxStyle}" />
+                        <CheckBox Content="Mint" IsChecked="{Binding ConditionFilters.Mint, Mode=TwoWay}" Style="{StaticResource BrownCheckBoxStyle}" />
+                        <CheckBox Content="Excellent" IsChecked="{Binding ConditionFilters.Excellent, Mode=TwoWay}" Style="{StaticResource BrownCheckBoxStyle}" />
+                        <CheckBox Content="Good" IsChecked="{Binding ConditionFilters.Good, Mode=TwoWay}" Style="{StaticResource BrownCheckBoxStyle}" />
+                        <CheckBox Content="Fair" IsChecked="{Binding ConditionFilters.Fair, Mode=TwoWay}" Style="{StaticResource BrownCheckBoxStyle}" />
+                        <CheckBox Content="Poor" IsChecked="{Binding ConditionFilters.Poor, Mode=TwoWay}" Style="{StaticResource BrownCheckBoxStyle}" />
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Stretch">
+                        <TextBlock
+                            Margin="0,0,0,8"
+                            Style="{StaticResource Heading3Style}"
+                            Text="Acquisition Date" />
+                        <ComboBox
+                            HorizontalAlignment="Stretch"
+                            SelectedIndex="{Binding SelectedAcquisitionDateIndex, Mode=TwoWay}"
+                            Style="{StaticResource BrownComboBoxStyle}">
+                            <ComboBoxItem Content="Any time" />
+                            <ComboBoxItem Content="Last 30 days" />
+                            <ComboBoxItem Content="Last 3 months" />
+                            <ComboBoxItem Content="Last 6 months" />
+                            <ComboBoxItem Content="Last year" />
+                            <ComboBoxItem Content="Custom range" />
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,0,16" HorizontalAlignment="Stretch">
+                        <TextBlock
+                            Margin="0,0,0,8"
+                            Style="{StaticResource Heading3Style}"
+                            Text="Tags" />
+                        <ScrollViewer
+                            MaxHeight="96"
+                            HorizontalScrollBarVisibility="Disabled"
+                            Style="{StaticResource HiddenScrollViewerStyle}"
+                            VerticalScrollBarVisibility="Disabled">
+                            <ItemsControl
+                                x:Name="TagsItemsControl"
+                                HorizontalAlignment="Stretch"
+                                ItemsSource="{Binding Tags}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapGrid
+                                            Margin="0,0,4,4"
+                                            ItemHeight="32"
+                                            ItemWidth="100"
+                                            MaximumRowsOrColumns="3"
+                                            Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border
+                                            Margin="0,0,4,4"
+                                            Padding="4,2"
+                                            Background="White"
+                                            BorderBrush="#8B4513"
+                                            BorderThickness="1"
+                                            CornerRadius="4">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock
+                                                    Grid.Column="0"
+                                                    Margin="4,0"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="Black"
+                                                    Text="{Binding}"
+                                                    TextTrimming="CharacterEllipsis" />
+                                                <Button
+                                                    Grid.Column="1"
+                                                    Width="20"
+                                                    Height="20"
+                                                    Margin="4,0,0,0"
+                                                    Padding="0"
+                                                    Background="Transparent"
+                                                    BorderThickness="0"
+                                                    Command="{Binding DataContext.RemoveTagCommand, ElementName=TagsItemsControl}"
+                                                    CommandParameter="{Binding}"
+                                                    Content="×"
+                                                    FontSize="12"
+                                                    Foreground="#8B4513" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                        <StackPanel Margin="0,8,0,0" Orientation="Horizontal">
+                            <TextBox
+                                Width="150"
+                                Margin="0,0,8,0"
+                                PlaceholderText="Enter new tag"
+                                Text="{Binding NewTagText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <Button
+                                Padding="8,4"
+                                Command="{Binding AddTagCommand}"
+                                Content="Add Tag"
+                                FontSize="12"
+                                Style="{StaticResource SecondaryButtonStyle}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Button
+                        Margin="0,16,0,0"
+                        HorizontalAlignment="Stretch"
+                        Command="{Binding ApplyFiltersCommand}"
+                        Content="Apply Filters"
+                        Style="{StaticResource PrimaryButtonStyle}" />
+
+                    <Button
+                        Width="56"
+                        Height="56"
+                        Margin="0,28,0,0"
+                        HorizontalAlignment="Right"
+                        Command="{Binding DataContext.ShowAddItemCommand, ElementName=RootPage}"
+                        Content="+"
+                        Style="{StaticResource RoundButtonStyle}" />
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>

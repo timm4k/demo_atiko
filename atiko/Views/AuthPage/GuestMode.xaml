@@ -1,0 +1,34 @@
+<UserControl
+    x:Class="atiko.Views.GuestMode"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+	<Grid
+        MinWidth="480"
+        Padding="32"
+        HorizontalAlignment="Stretch"
+        Background="#F7F2EE">
+		<StackPanel HorizontalAlignment="Stretch" Spacing="18">
+			<TextBlock
+                FontSize="18"
+                FontWeight="SemiBold"
+                Foreground="#62473D"
+                Text="Guest Mode" />
+			<TextBlock
+                FontSize="16"
+                Foreground="#62473D"
+                Text="Use without logging in"
+                TextWrapping="Wrap" />
+			<Button
+    x:Name="EnterGuestModeButton"
+    MinWidth="480"
+    HorizontalAlignment="Stretch"
+    Content="Enter guest mode"
+    Style="{StaticResource PrimaryButtonStyle}"
+    Click="EnterGuestModeButton_Click"/>
+
+		</StackPanel>
+	</Grid>
+</UserControl>

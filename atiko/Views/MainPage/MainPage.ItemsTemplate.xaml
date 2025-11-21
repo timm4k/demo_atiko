@@ -1,0 +1,35 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DataTemplate x:Key="ItemTemplate">
+        <Border
+            Width="220"
+            Height="280"
+            Margin="6"
+            CornerRadius="12"
+            Background="{StaticResource CardBackgroundBrush}"
+            BorderBrush="{StaticResource BorderBrush}"
+            BorderThickness="1">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border
+                    Width="200"
+                    Height="200"
+                    Margin="10"
+                    CornerRadius="8"
+                    Background="{StaticResource WhiteBrush}">
+                    <Image
+                        Source="{Binding ImageUri, FallbackValue=ms-appx:///Assets/Images/default-item.png}"
+                        Stretch="Uniform"/>
+                </Border>
+                <TextBlock
+                    Text="{Binding Name}"
+                    Style="{StaticResource Heading3Style}"
+                    Margin="10,5"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap"
+                    MaxWidth="200"/>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>

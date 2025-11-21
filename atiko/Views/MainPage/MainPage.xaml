@@ -1,0 +1,75 @@
+<Page
+    x:Class="atiko.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{StaticResource BackgroundBrush}"
+    xmlns:local="using:atiko.Views"
+    x:Name="RootPage">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Styles/AppStyles.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Views/MainPage/MainPage.Header.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Views/MainPage/MainPage.FiltersPanel.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Views/MainPage/MainPage.CategoriesPanel.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Views/MainPage/MainPage.ItemsTemplate.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Converters/Converters.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="240" MaxWidth="320"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ліва панель фільтрів -->
+        <ContentControl Grid.Column="0"
+                        ContentTemplate="{StaticResource MainPage_FiltersPanelTemplate}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"/>
+
+        <!-- права -->
+        <Grid Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ContentControl Grid.Row="0"
+                            ContentTemplate="{StaticResource MainPage_HeaderTemplate}"
+                            HorizontalContentAlignment="Stretch"/>
+
+            <ContentControl Grid.Row="1"
+                            ContentTemplate="{StaticResource MainPage_CategoriesPanelTemplate}"
+                            HorizontalContentAlignment="Stretch"/>
+
+            <ScrollViewer Grid.Row="2"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch">
+                <ListView x:Name="ItemsContainer"
+                          ItemsSource="{Binding Items}"
+                          ItemTemplate="{StaticResource ItemTemplate}"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Stretch"
+                          IsItemClickEnabled="True"
+                          ItemClick="ItemsContainer_ItemClick">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

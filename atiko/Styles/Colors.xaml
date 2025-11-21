@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  ==== кисті ====  -->
+    <SolidColorBrush x:Key="BackgroundBrush" Color="#D7CCC8" />
+    <SolidColorBrush x:Key="PrimaryBrush" Color="#5D4037" />
+    <SolidColorBrush x:Key="PrimaryLightBrush" Color="#A1887F" />
+    <SolidColorBrush x:Key="PrimaryDarkBrush" Color="#3E2723" />
+    <SolidColorBrush x:Key="SecondaryBrush" Color="#8D6E63" />
+    <SolidColorBrush x:Key="AccentBrush" Color="#8D6E63" />
+    <SolidColorBrush x:Key="PanelBrush" Color="#FFF6F3F0" />
+    <SolidColorBrush x:Key="CardBrush" Color="#FFF6F3F0" />
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="#FFF6F3F0" />
+    <SolidColorBrush x:Key="WhiteBrush" Color="#FFF6F3F0" />
+    <SolidColorBrush x:Key="DarkTextBrush" Color="#FFF6F3F0" />
+    <SolidColorBrush x:Key="TextLightBrush" Color="#A1887F" />
+    <SolidColorBrush x:Key="GoldBrush" Color="#FFD700" />
+    <SolidColorBrush x:Key="GrayBrush" Color="#D7CCC8" />
+    <SolidColorBrush x:Key="DangerBrush" Color="#F44336" />
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#3E2723" />
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="#A1887F" />
+    <SolidColorBrush x:Key="BorderBrush" Color="#A1887F" />
+
+    <!--  системні елементи  -->
+    <SolidColorBrush x:Key="SystemAccentColorBrush" Color="#8D6E63" />
+    <SolidColorBrush x:Key="SystemAccentColorLight1Brush" Color="#A1887F" />
+    <SolidColorBrush x:Key="SystemAccentColorDark1Brush" Color="#5D4037" />
+    <SolidColorBrush x:Key="SystemAccentColorDark2Brush" Color="#3E2723" />
+    <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="#A1887F" />
+    <SolidColorBrush x:Key="TextBoxBorderBrushFocused" Color="#A1887F" />
+    <SolidColorBrush x:Key="SystemControlBackgroundAltHighBrush" Color="#FFF5F5F5" />
+
+    <!--  додаткові  -->
+    <SolidColorBrush x:Key="AppBackgroundBrush" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="ShadowBrush" Color="#33000000" />
+
+</ResourceDictionary>

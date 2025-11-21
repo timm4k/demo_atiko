@@ -1,0 +1,215 @@
+﻿<Page
+    x:Class="atiko.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="using:atiko.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{StaticResource BackgroundBrush}"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Storyboard x:Key="FadeInAnimation">
+            <DoubleAnimation
+                Storyboard.TargetName="SettingsPanel"
+                Storyboard.TargetProperty="Opacity"
+                From="0.0"
+                To="1.0"
+                Duration="0:0:0.5" />
+        </Storyboard>
+        <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <conv:StringFormatConverter x:Key="StringFormatConverter"/>
+    </Page.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Button
+            Grid.Row="0"
+            Height="36"
+            MinWidth="90"
+            Margin="0,0,0,16"
+            Padding="8,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="NavigateBack_Click"
+            Style="{StaticResource SecondaryButtonStyle}">
+            <StackPanel
+                VerticalAlignment="Center"
+                Orientation="Horizontal"
+                Spacing="4">
+                <FontIcon
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="16"
+                    Glyph="" />
+                <TextBlock
+                    x:Uid="Back"
+                    FontSize="16"
+                    Style="{StaticResource BodyTextStyle}"
+                    Text="Back"
+                    Foreground="Black" />
+            </StackPanel>
+        </Button>
+
+        <ScrollViewer Grid.Row="1">
+            <Border
+                x:Name="SettingsPanel"
+                Padding="48"
+                Background="{StaticResource CardBrush}"
+                CornerRadius="38"
+                Loaded="SettingsPanel_Loaded"
+                Opacity="0">
+                <StackPanel Spacing="36">
+                    <TextBlock Style="{StaticResource Heading1Style}" Text="Settings" />
+
+                    <!-- гість -->
+                    <StackPanel
+    Spacing="18"
+    Visibility="{Binding IsGuestMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <TextBlock Style="{StaticResource Heading2Style}" Text="Guest Mode" />
+                        <TextBlock
+        Style="{StaticResource BodyTextStyle}"
+        Text="You are not logged in. Log in or sign up to access your profile." />
+                        <StackPanel Orientation="Horizontal" Spacing="14">
+                            <Button
+            Height="44"
+            MinWidth="120"
+            Command="{Binding GoToLoginCommand}"
+            Content="Log In"
+            FontSize="18"
+            Style="{StaticResource PrimaryButtonStyle}" />
+                            <Button
+            Height="44"
+            MinWidth="120"
+            Command="{Binding GoToSignUpCommand}"
+            Content="Sign Up"
+            FontSize="18"
+            Style="{StaticResource PrimaryButtonStyle}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- зареєст -->
+                    <StackPanel
+    Spacing="18"
+    Visibility="{Binding IsGuestMode, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}">
+                        <TextBlock Style="{StaticResource Heading2Style}" Text="Profile" />
+                        <StackPanel Orientation="Horizontal" Spacing="32">
+                            <Border
+            Width="90"
+            Height="90"
+            Background="{StaticResource CardBrush}"
+            CornerRadius="45">
+                                <Image
+                Source="{Binding CurrentUser.ImageUri, FallbackValue='ms-appx:///Assets/Images/image_profile.jpg'}"
+                Stretch="UniformToFill" />
+                            </Border>
+                            <StackPanel VerticalAlignment="Center" Spacing="10">
+                                <TextBlock Style="{StaticResource Heading2Style}" Text="{Binding CurrentUser.Name}" />
+                                <TextBlock Style="{StaticResource BodyTextStyle}" Text="{Binding CurrentUser.Email}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- змінити аву тільки реєст -->
+                    <StackPanel
+                        Spacing="14"
+                        Visibility="{Binding IsGuestMode, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}">
+                        <TextBlock Style="{StaticResource Heading2Style}" Text="Change Avatar" />
+                        <StackPanel Orientation="Horizontal" Spacing="14">
+                            <TextBox
+                                x:Name="AvatarUriTextBox"
+                                Width="320"
+                                IsReadOnly="True"
+                                PlaceholderText="Enter image URL or local path"
+                                Style="{StaticResource LightTextBoxStyle}"
+                                Text="{Binding AvatarUri, Mode=OneWay}" />
+                            <Button
+                                Content="Upload Avatar"
+                                Command="{Binding UploadAvatarCommand}"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                HorizontalAlignment="Stretch"
+                                MinWidth="480" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- тема -->
+                    <StackPanel Spacing="14">
+                        <TextBlock Style="{StaticResource Heading2Style}" Text="Theme" />
+                        <ToggleSwitch
+                            x:Name="ThemeToggle"
+                            Margin="0,4,0,0"
+                            IsEnabled="True"
+                            IsOn="{Binding IsDarkTheme, Mode=TwoWay}"
+                            Style="{StaticResource ThemeToggleSwitchStyle}" />
+                    </StackPanel>
+
+                    <!-- мова -->
+                    <StackPanel Spacing="14">
+                        <TextBlock Style="{StaticResource Heading2Style}" Text="Language" />
+                        <ComboBox
+                            x:Name="LanguageComboBox"
+                            Width="220"
+                            DisplayMemberPath="DisplayName"
+                            IsEnabled="True"
+                            ItemsSource="{Binding AvailableLanguages}"
+                            SelectedValue="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedValuePath="LanguageCode"
+                            Style="{StaticResource BrownComboBoxStyle}" />
+                    </StackPanel>
+
+                    <!-- стати -->
+                    <StackPanel Spacing="14">
+                        <TextBlock Style="{StaticResource Heading2Style}" Text="User Statistics" />
+                        <TextBlock Style="{StaticResource BodyTextStyle}" Text="{Binding UserStatistics.TotalUsers, Converter={StaticResource StringFormatConverter}, ConverterParameter='Total Users: {0}'}" />
+                        <TextBlock Style="{StaticResource BodyTextStyle}" Text="{Binding UserStatistics.ActiveUsers, Converter={StaticResource StringFormatConverter}, ConverterParameter='Active Users: {0}'}" />
+                        <TextBlock Style="{StaticResource BodyTextStyle}" Text="{Binding UserStatistics.AverageNotifications, Converter={StaticResource StringFormatConverter}, ConverterParameter='Average Notifications: {0:F2}'}" />
+                        <TextBlock Style="{StaticResource BodyTextStyle}" Text="{Binding UserStatistics.NewestUserDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='Newest User: {0:yyyy-MM-dd}'}" />
+                        <TextBlock Style="{StaticResource BodyTextStyle}" Text="{Binding UserStatistics.OldestUserDate, Converter={StaticResource StringFormatConverter}, ConverterParameter='Oldest User: {0:yyyy-MM-dd}'}" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="20" HorizontalAlignment="Left">
+                        <Button
+                            Height="48"
+                            MinWidth="180"
+                            Command="{Binding SaveSettingsCommand}"
+                            Content="Save Settings"
+                            FontSize="18"
+                            Style="{StaticResource PrimaryButtonStyle}" />
+                        <Button
+                            Height="48"
+                            MinWidth="180"
+                            Click="Logout_Click"
+                            Content="Log Out"
+                            FontSize="18"
+                            Style="{StaticResource SecondaryButtonStyle}"
+                            Visibility="{Binding IsGuestMode, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}" />
+                        <Button
+                            Height="48"
+                            MinWidth="180"
+                            Click="ChangePassword_Click"
+                            Content="Change Password"
+                            FontSize="18"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Visibility="{Binding IsGuestMode, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}" />
+                        <TextBlock
+                            x:Name="SaveMessageTextBlock"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource BodyTextStyle}"
+                            Text="{Binding SaveMessage, Mode=OneWay}"
+                            Visibility="{Binding SaveMessageVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        <TextBlock
+                            x:Name="ErrorMessageTextBlock"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource BodyTextStyle}"
+                            Text="{Binding ErrorMessage, Mode=OneWay}"
+                            Visibility="{Binding ErrorMessageVisibility, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Foreground="Red" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
+    </Grid>
+</Page>

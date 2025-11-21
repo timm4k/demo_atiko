@@ -1,0 +1,30 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:atiko.Converters">
+
+    <local:BooleanToFontWeightConverter x:Key="BooleanToFontWeightConverter" />
+    <local:BooleanToHeartIconConverter x:Key="BooleanToHeartIconConverter" />
+    <local:BooleanToSortDirectionConverter x:Key="BooleanToSortDirectionConverter" />
+    <local:ConditionToBackgroundConverter x:Key="ConditionToBackgroundConverter" />
+    <local:ConditionToForegroundConverter x:Key="ConditionToForegroundConverter" />
+    <local:CurrencyConverter x:Key="CurrencyConverter" />
+    <local:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
+    <local:DistinctCategoryConverter x:Key="DistinctCategoryConverter" />
+    <local:DistinctConditionConverter x:Key="DistinctConditionConverter" />
+    <local:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    <local:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter" />
+    <local:ImagePathConverter x:Key="ImagePathConverter" />
+    <local:ModeToBrushConverter x:Key="ModeToBrushConverter" />
+    <local:NonEmptyStringToVisibilityConverter x:Key="NonEmptyStringToVisibilityConverter" />
+    <local:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
+    <local:ConditionToBooleanConverter x:Key="ConditionToBooleanConverter" />
+    <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <local:ModeToTextConverter x:Key="ModeToTextConverter" />
+    <local:InverseVisibilityConverter x:Key="InverseVisibilityConverter" />
+    <local:DecimalConverter x:Key="DecimalConverter" />
+    <local:IntToStringConverter x:Key="IntToStringConverter" />
+    <local:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+    <local:ListToStringConverter x:Key="ListToStringConverter" />
+
+</ResourceDictionary>

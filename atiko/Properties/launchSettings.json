@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "atiko (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "atiko (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

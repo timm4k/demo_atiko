@@ -1,0 +1,11 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  шрифти  -->
+    <FontFamily x:Key="MontserratRegularFont">ms-appx:///Assets/Fonts/Montserrat-Regular.ttf#Montserrat</FontFamily>
+    <FontFamily x:Key="MontserratBoldFont">ms-appx:///Assets/Fonts/Montserrat-Bold.ttf#Montserrat</FontFamily>
+    <FontFamily x:Key="MontserratBlackFont">ms-appx:///Assets/Fonts/Montserrat-Black.ttf#Montserrat</FontFamily>
+    <FontFamily x:Key="DMSansRegularFont">ms-appx:///Assets/Fonts/DMSansFont-Regular.ttf#DMSans</FontFamily>
+    <FontFamily x:Key="DMSansBlackFont">ms-appx:///Assets/Fonts/DMSansFont-Black.ttf#DMSans</FontFamily>
+    <FontFamily x:Key="DMSansBoldFont">ms-appx:///Assets/Fonts/DMSansFont-Bold.ttf#DMSans</FontFamily>
+
+</ResourceDictionary>
