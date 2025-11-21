@@ -3,3 +3,7 @@ bin/
 obj/ 
 *.suo 
 *.user 
+Package.appxmanifest 
+app.manifest 
+atiko.csproj 
+atiko.sln 
